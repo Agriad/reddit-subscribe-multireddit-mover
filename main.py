@@ -8,19 +8,24 @@ def init_connect():
     return reddit
 
 
-def test(reddit):
+def subreddit_scraper(reddit):
     subreddits = reddit.user.subreddits(limit=None)
-    counter = 0
     
     for subreddit in subreddits:
-        counter = counter + 1
-        print(counter)
         print(subreddit)
     
+
+def multireddit_scraper(reddit):
+    multireddits = reddit.user.multireddits()
+
+    for multireddit in multireddits:
+        print(multireddit)
+
 
 def main():
     reddit = init_connect()
     print("username: " + str(reddit.user.me()))
-    test(reddit)
+    subreddit_scraper(reddit)
+    multireddit_scraper(reddit)
 
 main()
