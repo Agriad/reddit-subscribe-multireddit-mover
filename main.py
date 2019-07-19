@@ -4,10 +4,10 @@ import re
 from data import *
 
 # initializes a Reddit instance which connects the script with reddit
-def init_connect():
-    reddit = praw.Reddit(client_id=CLIENT_ID,
-                     client_secret=SECRET_KEY, password=PASSWORD,
-                     user_agent=USER_AGENT, username=USERNAME)
+def init_connect(client_id, secret_key, password, user_agent, username):
+    reddit = praw.Reddit(client_id=client_id,
+                         client_secret=secret_key, password=password,
+                         user_agent=user_agent, username=username)
     return reddit
 
 
@@ -15,12 +15,12 @@ def init_connect():
 def subreddit_scraper(reddit):
     subreddits = reddit.user.subreddits(limit=None)
     list_subreddit = []
-    
+
     for subreddit in subreddits:
         list_subreddit.append(subreddit)
 
     return list_subreddit
-    
+
 
 # extracts the multireddits that the user created
 def multireddit_scraper(reddit):
@@ -64,16 +64,32 @@ def multireddit_data_extractor(data):
 
     return display_name
 
+
+# subscribes the target user to the extracted subreddits
+def subreddit_subscriber(subreddits):
+    target_reddit = init_connect(TARGET_CLIENT_ID, TARGET_SECRET_KEY,
+                          TARGET_PASSWORD, TARGET_USER_AGENT, TARGET_USERNAME)
+    print("target username: " + str(target_reddit.user.me()))
+    for subreddit in subreddits:
+        print(subreddit)
+        display_name = target_reddit.subreddit(str(subreddit))
+        print(display_name.user_is_subscriber)
+        if not display_name.user_is_subscriber:
+            display_name.subscribe()
+
+
 # what main handler of the program
 def main():
-    reddit = init_connect()
+    reddit = init_connect(CLIENT_ID, SECRET_KEY,
+                          PASSWORD, USER_AGENT, USERNAME)
     print("username: " + str(reddit.user.me()))
 
     subreddit = subreddit_scraper(reddit)
     multireddit = multireddit_scraper(reddit)
     multireddit_subreddits = multireddit_extractor(reddit, multireddit)
+    subreddit_subscriber(subreddit + multireddit_subreddits)
 
-    print(subreddit + multireddit_subreddits)
+    print("done")
 
 
 main()
