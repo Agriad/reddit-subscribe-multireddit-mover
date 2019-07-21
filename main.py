@@ -53,7 +53,7 @@ def multireddit_name(multireddit):
     return words[4]
 
 
-# exrtacts the name of the subreddit in a multireddit
+# extracts the name of the subreddit in a multireddit
 def multireddit_data_extractor(data):
     display_name = []
 
