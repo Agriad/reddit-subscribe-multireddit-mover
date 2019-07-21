@@ -1,5 +1,4 @@
 import praw
-import re
 
 from data import *
 
@@ -40,8 +39,6 @@ def multireddit_extractor(reddit, multireddits):
     for multireddit in multireddits:
         name = multireddit_name(multireddit)
         multireddit_data = reddit.multireddit(USERNAME, name).subreddits
-        # multireddit_extract = multireddit_data_extractor(multireddit_data)
-        # subreddits = subreddits + multireddit_extract
         subreddits = subreddits + multireddit_data
 
     return subreddits
@@ -69,11 +66,11 @@ def multireddit_data_extractor(data):
 def subreddit_subscriber(subreddits):
     target_reddit = init_connect(TARGET_CLIENT_ID, TARGET_SECRET_KEY,
                           TARGET_PASSWORD, TARGET_USER_AGENT, TARGET_USERNAME)
-    print("target username: " + str(target_reddit.user.me()))
+    print("Target username: " + str(target_reddit.user.me()))
     for subreddit in subreddits:
         print(subreddit)
         display_name = target_reddit.subreddit(str(subreddit))
-        print(display_name.user_is_subscriber)
+        print("Is subscribed: " + str(display_name.user_is_subscriber))
         if not display_name.user_is_subscriber:
             display_name.subscribe()
 
@@ -82,14 +79,14 @@ def subreddit_subscriber(subreddits):
 def main():
     reddit = init_connect(CLIENT_ID, SECRET_KEY,
                           PASSWORD, USER_AGENT, USERNAME)
-    print("username: " + str(reddit.user.me()))
+    print("Username: " + str(reddit.user.me()))
 
     subreddit = subreddit_scraper(reddit)
     multireddit = multireddit_scraper(reddit)
     multireddit_subreddits = multireddit_extractor(reddit, multireddit)
     subreddit_subscriber(subreddit + multireddit_subreddits)
 
-    print("done")
+    print("Done")
 
 
 main()
