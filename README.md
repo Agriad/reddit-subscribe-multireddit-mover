@@ -8,7 +8,7 @@
 
 <a name="description"></a>
 ## 1. Description
-This script moves your subreddit subscription and any subreddits in any created multireddit to another account. Makes it easier to migrate form one account to another.
+This script moves your subreddit subscription and any subreddits in any created multireddit to another account's subscription list. Makes it easier to migrate form one account to another.
 
 <a name="requirements"></a>
 ## 2. Requirements
