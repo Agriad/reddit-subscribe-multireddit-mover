@@ -15,8 +15,6 @@ This script moves your subreddit subscription and any subreddits in any created 
 1. Python 3
 2. PRAW
 
-EXPAND MORE
-
 <a name="installation"></a>
 ## 3. Installation
 Just download as a zip and extract anywhere. Make note of the location where the script is extracted.
