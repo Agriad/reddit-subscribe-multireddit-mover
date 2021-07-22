@@ -1,10 +1,10 @@
 # **Reddit Subscribe Multireddit Mover**
 
 # Index
-1. [Description] (#description)
-2. [Requirements] (#requirements)
-3. [Installation] (#installation)
-4. [Guide] (#guide)
+1. [Description](#description)
+2. [Requirements](#requirements)
+3. [Installation](#installation)
+4. [Guide](#guide)
 
 <a name="description"></a>
 ## 1. Description
